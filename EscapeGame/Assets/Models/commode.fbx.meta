@@ -1,0 +1,203 @@
+fileFormatVersion: 2
+guid: 47fcd535c60d70243a191fe5ce54a3b7
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Chest of drawers
+    100002: //RootNode
+    100004: Drawer1
+    100006: Drawer2
+    100008: Drawer3
+    100010: Drawer4
+    100012: Drawer5
+    100014: Drawer6
+    100016: Drawer7
+    100018: Drawer8
+    100020: Drawer9
+    100022: Drawer_Big1
+    100024: Drawer_Big1_Handle
+    100026: Drawer_Big2
+    100028: Drawer_Big2_Handle
+    100030: Drawer_Med1
+    100032: Drawer_Med1_Handle
+    100034: Drawer_Med2
+    100036: Drawer_Med2 1
+    100038: Drawer_Med2_Handle
+    100040: Drawer_Med3_Handle
+    100042: pPlane1
+    100044: pPlane2
+    100046: pPlane3
+    100048: pPlane4
+    100050: pPlane5
+    400000: Chest of drawers
+    400002: //RootNode
+    400004: Drawer1
+    400006: Drawer2
+    400008: Drawer3
+    400010: Drawer4
+    400012: Drawer5
+    400014: Drawer6
+    400016: Drawer7
+    400018: Drawer8
+    400020: Drawer9
+    400022: Drawer_Big1
+    400024: Drawer_Big1_Handle
+    400026: Drawer_Big2
+    400028: Drawer_Big2_Handle
+    400030: Drawer_Med1
+    400032: Drawer_Med1_Handle
+    400034: Drawer_Med2
+    400036: Drawer_Med2 1
+    400038: Drawer_Med2_Handle
+    400040: Drawer_Med3_Handle
+    400042: pPlane1
+    400044: pPlane2
+    400046: pPlane3
+    400048: pPlane4
+    400050: pPlane5
+    2100000: brown_braun
+    2100002: blinn1
+    2100004: schwarz
+    2300000: Chest of drawers
+    2300002: Drawer1
+    2300004: Drawer2
+    2300006: Drawer3
+    2300008: Drawer4
+    2300010: Drawer_Big1
+    2300012: Drawer_Big1_Handle
+    2300014: Drawer_Big2
+    2300016: Drawer_Big2_Handle
+    2300018: Drawer_Med1
+    2300020: Drawer_Med1_Handle
+    2300022: Drawer_Med2
+    2300024: Drawer_Med2 1
+    2300026: Drawer_Med2_Handle
+    2300028: Drawer_Med3_Handle
+    2300030: pPlane1
+    2300032: pPlane2
+    2300034: pPlane3
+    2300036: pPlane4
+    2300038: pPlane5
+    3300000: Chest of drawers
+    3300002: Drawer1
+    3300004: Drawer2
+    3300006: Drawer3
+    3300008: Drawer4
+    3300010: Drawer_Big1
+    3300012: Drawer_Big1_Handle
+    3300014: Drawer_Big2
+    3300016: Drawer_Big2_Handle
+    3300018: Drawer_Med1
+    3300020: Drawer_Med1_Handle
+    3300022: Drawer_Med2
+    3300024: Drawer_Med2 1
+    3300026: Drawer_Med2_Handle
+    3300028: Drawer_Med3_Handle
+    3300030: pPlane1
+    3300032: pPlane2
+    3300034: pPlane3
+    3300036: pPlane4
+    3300038: pPlane5
+    4300000: Drawer2
+    4300002: Drawer4
+    4300004: Drawer3
+    4300006: Chest of drawers
+    4300008: Drawer1
+    4300010: Drawer_Med2
+    4300012: pPlane1
+    4300014: Drawer_Med2_Handle
+    4300016: pPlane2
+    4300018: Drawer_Med1_Handle
+    4300020: Drawer_Med1
+    4300022: Drawer_Med2
+    4300024: pPlane3
+    4300026: Drawer_Med3_Handle
+    4300028: Drawer_Big1
+    4300030: Drawer_Big1_Handle
+    4300032: pPlane4
+    4300034: Drawer_Big2_Handle
+    4300036: Drawer_Big2
+    4300038: pPlane5
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
