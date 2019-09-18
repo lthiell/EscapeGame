@@ -5,6 +5,9 @@ using Valve.VR;
 public class Hand : MonoBehaviour
 {
     public SteamVR_Action_Boolean m_GrabAction = null;
+    public Haptics haptics;
+
+    public Color OUTLINE_COLOR;
 
     private SteamVR_Behaviour_Pose m_Pose = null;
     public FixedJoint m_Joint = null;
@@ -13,10 +16,46 @@ public class Hand : MonoBehaviour
     private Interactable m_HighlightedInteractable;
     private List<Interactable> m_ContactInteractables = new List<Interactable>();
 
-    private void Awake()
+    private GameObject handRenderModel;
+    private Outline outline;
+
+ 
+
+    private void Start()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
+    }
+
+    private void InitOutline()
+    {
+        if(outline == null)
+        { 
+        if (m_Pose.inputSource.Equals(SteamVR_Input_Sources.LeftHand))
+        {
+            handRenderModel = GameObject.Find("LeftRenderModel Slim(Clone)");
+        }
+        else
+        {
+            handRenderModel = GameObject.Find("RightRenderModel Slim(Clone)");
+        }
+        outline = handRenderModel.AddComponent<Outline>();
+        outline.OutlineMode = Outline.Mode.OutlineAll;
+        outline.OutlineColor = OUTLINE_COLOR;
+        outline.OutlineWidth = 10f;
+        outline.enabled = false;
+        }
+    }
+
+    private void ActivateOutline()
+    {
+        InitOutline();
+        outline.enabled = true;
+    }
+
+    private void DeactivateOutline()
+    {
+        outline.enabled = false;
     }
 
     // Update is called once per frame
@@ -37,6 +76,8 @@ public class Hand : MonoBehaviour
         Interactable nearest = null;
         if (!other.gameObject.CompareTag("Interactable"))
             return;
+
+        ActivateOutline();
 
         m_ContactInteractables.Add(other.gameObject.GetComponent<Interactable>());
 
@@ -63,6 +104,8 @@ public class Hand : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Interactable"))
             return;
+
+        DeactivateOutline();
 
         // Interactable aus der Liste der Interactables in der Nähe entfernen
         m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());

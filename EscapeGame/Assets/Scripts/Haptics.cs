@@ -6,7 +6,6 @@ public class Haptics : MonoBehaviour
 {
 
     public SteamVR_Action_Vibration hapticAction;
-    //public Func<SteamVR_Input_Sources> HandGetter;
     private SteamVR_Input_Sources inputSource;
 
     public void SetInputSource(SteamVR_Input_Sources inputSource)

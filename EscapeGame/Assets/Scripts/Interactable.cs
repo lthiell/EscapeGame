@@ -12,7 +12,6 @@ public class Interactable : MonoBehaviour
         // Outline initialisieren, falls nötig
         if (showOutline)
         {
-            print("adding outline for: " + this.gameObject.name);
             outline = gameObject.AddComponent<Outline>();
             outline.OutlineMode = Outline.Mode.OutlineAll;
             outline.OutlineColor = OUTLINE_COLOR;
