@@ -3,44 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR;
 
-public class Keyboard : MonoBehaviour
+public class Keyboard : PointerUI
 {
 
     public TextValidator validator;
-    public List<GameObject> pointerObjects;
 
     public Text displayArea = null;
     private bool hidePassword = true;
 
     protected string currentText = "";
 
-
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (!other.gameObject.CompareTag("Hand"))
-            return;
-        foreach (GameObject obj in pointerObjects)
-        {
-            obj.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.gameObject.CompareTag("Hand"))
-            return;
-
-        foreach (GameObject obj in pointerObjects)
-        {
-            obj.SetActive(false);
-        }
-    }
 
     protected virtual void AddToText(Key key)
     {

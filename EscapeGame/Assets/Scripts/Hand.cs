@@ -16,46 +16,52 @@ public class Hand : MonoBehaviour
     private Interactable m_HighlightedInteractable;
     private List<Interactable> m_ContactInteractables = new List<Interactable>();
 
-    private GameObject handRenderModel;
+    private GameObject hand;
     private Outline outline;
 
- 
 
     private void Start()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
+        //InitOutline();
+        outline = GetComponent<Outline>();
     }
 
     private void InitOutline()
     {
-        if(outline == null)
-        { 
-        if (m_Pose.inputSource.Equals(SteamVR_Input_Sources.LeftHand))
+        if (outline == null)
         {
-            handRenderModel = GameObject.Find("LeftRenderModel Slim(Clone)");
-        }
-        else
-        {
-            handRenderModel = GameObject.Find("RightRenderModel Slim(Clone)");
-        }
-        outline = handRenderModel.AddComponent<Outline>();
-        outline.OutlineMode = Outline.Mode.OutlineAll;
-        outline.OutlineColor = OUTLINE_COLOR;
-        outline.OutlineWidth = 10f;
-        outline.enabled = false;
+            if (m_Pose.inputSource.Equals(SteamVR_Input_Sources.LeftHand))
+            {
+                hand = GameObject.Find("LeftHand");
+            }
+            else
+            {
+                hand = GameObject.Find("RightHand");
+            }
+            outline = hand.AddComponent<Outline>();
+            outline.OutlineMode = Outline.Mode.OutlineAll;
+            outline.OutlineColor = OUTLINE_COLOR;
+            outline.OutlineWidth = 10f;
+            outline.enabled = false;
         }
     }
 
     private void ActivateOutline()
     {
-        InitOutline();
-        outline.enabled = true;
+        if(outline != null)
+        {
+            outline.enabled = true;
+        }
     }
 
     private void DeactivateOutline()
     {
-        outline.enabled = false;
+        if(outline != null)
+        {
+            outline.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -93,11 +99,11 @@ public class Hand : MonoBehaviour
         {
             m_HighlightedInteractable = nearest;
         }
-        if(m_HighlightedInteractable != null)
+        if (m_HighlightedInteractable != null)
         {
             m_HighlightedInteractable.OnHoverEnter(m_Pose.inputSource);
         }
-      
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -111,7 +117,7 @@ public class Hand : MonoBehaviour
         m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
 
         // Wenn das entfernte Interactable das gehighlightete ist, dann Highlight entfernen
-        if(other.gameObject.GetComponent<Interactable>() != null 
+        if (other.gameObject.GetComponent<Interactable>() != null
             && other.gameObject.GetComponent<Interactable>().Equals(m_HighlightedInteractable))
         {
             m_HighlightedInteractable.OnHoverExit(m_Pose.inputSource);
@@ -128,7 +134,8 @@ public class Hand : MonoBehaviour
         if (m_CurrentInteractable is Button)
         {
             ((Button)m_CurrentInteractable).HandleButtonPress();
-        } else if (m_CurrentInteractable.IsMovable())
+        }
+        else if (m_CurrentInteractable.IsMovable())
         {
             ((Movable)m_CurrentInteractable).HandlePickup(this);
         }
@@ -139,7 +146,7 @@ public class Hand : MonoBehaviour
         if (!m_CurrentInteractable)
             return;
 
-        if(m_CurrentInteractable.IsMovable())
+        if (m_CurrentInteractable.IsMovable())
         {
             if (((Movable)m_CurrentInteractable).m_ActiveHand == this)
             {
@@ -159,7 +166,7 @@ public class Hand : MonoBehaviour
         foreach (Interactable i in m_ContactInteractables)
         {
             dist = (i.transform.position - transform.position).sqrMagnitude;
-            if(dist < minDist)
+            if (dist < minDist)
             {
                 minDist = dist;
                 nearest = i;

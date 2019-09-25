@@ -49,7 +49,6 @@ public class LockedMovable : MagicMovable
             print("Offen auf Umwegen (:");
             if (audioSource)
             {
-                print("Play");
                 audioSource.Play();
             }
 

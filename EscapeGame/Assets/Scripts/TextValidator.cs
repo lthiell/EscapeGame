@@ -7,12 +7,16 @@ public class TextValidator : MonoBehaviour
     
 
     public UnityEvent handleValidPassword;
+    public UnityEvent handleWrongPassword;
 
     public void Validate(string password)
     {
         if(this.password.Equals(password))
         {
             handleValidPassword.Invoke();
+        } else
+        {
+            handleWrongPassword.Invoke();
         }
     }
 }

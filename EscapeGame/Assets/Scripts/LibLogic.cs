@@ -6,7 +6,11 @@ public class LibLogic : MonoBehaviour
 {
     public GameObject keyboard;
     public GameObject keypad;
-    public Material unlockedMaterial;
+    public Material computerUnlockedMaterial;
+    public Material computerWrongPasswordMaterial;
+    public Material computerDefaultMaterial;
+    public AudioSource computerUnlockSound;
+    public AudioSource computerWrongPasswordSound;
     public GameObject computerBackground;
     public GameObject hallway;
 
@@ -16,7 +20,6 @@ public class LibLogic : MonoBehaviour
 
     public string menuScene;
     private LevelLoader levelLoader;
-    private ActionSetManager ASManager;
 
     public Door exitDoor;
     private bool exitOpened = false;
@@ -32,7 +35,6 @@ public class LibLogic : MonoBehaviour
     {
         gameObject.AddComponent(typeof(LevelLoader));
         levelLoader = GetComponent<LevelLoader>();
-        ASManager = GetComponent<ActionSetManager>();
         rayInputElements = new List<GameObject>(new GameObject[] { keyboard, keypad });
         haptics = GetComponent<Haptics>();
         haptics.SetInputSource(leftHandRay ? SteamVR_Input_Sources.LeftHand : SteamVR_Input_Sources.RightHand);
@@ -55,14 +57,41 @@ public class LibLogic : MonoBehaviour
         return exitOpened;
     }
 
+    private void SetComputerBackgroundMaterial(Material material)
+    {
+        MeshRenderer meshRenderer = computerBackground.GetComponent<MeshRenderer>();
+        meshRenderer.material = material;
+    }
+
     public void UnlockComputer()
     {
-        print("Computer is unlocked.");
         keyboard.SetActive(false);
-        ASManager.ActivateTeleportSet();
         computerLocked = false;
-        MeshRenderer meshRenderer = computerBackground.GetComponent<MeshRenderer>();
-        meshRenderer.material = unlockedMaterial;
+        SetComputerBackgroundMaterial(computerUnlockedMaterial);
+        if(computerUnlockSound)
+        {
+            computerUnlockSound.Play();
+        }
+    }
+
+    public void HandleWrongComputerPassword()
+    {
+        SetComputerBackgroundMaterial(computerWrongPasswordMaterial);
+        StartCoroutine(WaitAndSetComputerBackgroundMaterialToDefault(2.0f));
+        if(computerWrongPasswordSound)
+        {
+            computerWrongPasswordSound.Play();
+        }
+    }
+
+    private IEnumerator<WaitForSeconds> WaitAndSetComputerBackgroundMaterialToDefault(float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime);
+            SetComputerBackgroundMaterial(computerDefaultMaterial);
+            StopAllCoroutines();
+        }
     }
 
     public bool IsComputerLocked()
