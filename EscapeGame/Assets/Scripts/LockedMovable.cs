@@ -10,7 +10,7 @@ public class LockedMovable : MagicMovable
 
     private AudioSource audioSource;
 
-    private Dictionary<int, Vector3> containerInitialLocalScales = new Dictionary<int, Vector3>();
+    private ObjectHider objectHider = ObjectHider.GetSingleton();
 
 
     public override void StartSpecific()
@@ -18,7 +18,7 @@ public class LockedMovable : MagicMovable
         base.StartSpecific();
         foreach (GameObject go in container)
         {
-            HideGameObject(go);
+            objectHider.HideGameObject(go);
         }
         audioSource = GetComponent<AudioSource>();
     }
@@ -46,39 +46,14 @@ public class LockedMovable : MagicMovable
         if (locked)
         {
             locked = false;
-            print("Offen auf Umwegen (:");
             if (audioSource)
             {
                 audioSource.Play();
             }
-
             foreach (GameObject go in container)
             {
-                ShowGameObject(go);
+                objectHider.ShowGameObject(go);
             }
-        }
-    }
-
-    private void HideGameObject(GameObject go)
-    {
-        containerInitialLocalScales.Add(go.GetInstanceID(), go.transform.localScale);
-        go.transform.localScale = new Vector3(0, 0, 0);
-        Rigidbody rb = go.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.useGravity = false;
-        }
-    }
-
-    private void ShowGameObject(GameObject go)
-    {
-        Vector3 value;
-        containerInitialLocalScales.TryGetValue(go.GetInstanceID(), out value);
-        go.transform.localScale = value;
-        Rigidbody rb = go.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.useGravity = true;
         }
     }
 }
