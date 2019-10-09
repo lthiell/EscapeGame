@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Valve.VR;
 
 public class Interactable : MonoBehaviour
@@ -43,5 +44,26 @@ public class Interactable : MonoBehaviour
     public virtual bool IsMovable()
     {
         return false;
+    }
+
+    public void DisableLoopedSounds()
+    {
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (AudioSource audioSource in audioSources)
+        {
+            if (audioSource.loop)
+            {
+                audioSource.enabled = false;
+            }
+        }
+    }
+
+    public void DisableHint()
+    {
+        Hint hint = gameObject.GetComponent<Hint>();
+        if (hint)
+        {
+            hint.Disable();
+        }
     }
 }

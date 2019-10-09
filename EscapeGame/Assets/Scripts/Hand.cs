@@ -139,7 +139,11 @@ public class Hand : MonoBehaviour
         {
             ((Movable)m_CurrentInteractable).HandlePickup(this);
         }
+
+        m_CurrentInteractable.DisableHint();
+        m_CurrentInteractable.DisableLoopedSounds();
     }
+
 
     public void Drop()
     {

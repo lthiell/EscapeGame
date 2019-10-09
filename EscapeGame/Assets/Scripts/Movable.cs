@@ -25,7 +25,6 @@ public abstract class Movable : Interactable
         //set active hand
         m_ActiveHand = hand;
         HandlePickupSpecific();
-  
     }
 
     public void HandleDrop(SteamVR_Behaviour_Pose pose)

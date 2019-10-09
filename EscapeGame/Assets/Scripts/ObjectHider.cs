@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectHider : MonoBehaviour
+public class ObjectHider
 {
     private Dictionary<int, Vector3> containerInitialLocalScales = new Dictionary<int, Vector3>();
     

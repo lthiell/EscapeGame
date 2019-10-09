@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     private Animator animator;
     private ObjectHider objectHider = ObjectHider.GetSingleton();
     public List<GameObject> container = new List<GameObject>();
-
+     
     void Start()
     {
         animator = GetComponent<Animator>();

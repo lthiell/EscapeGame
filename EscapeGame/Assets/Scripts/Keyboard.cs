@@ -18,12 +18,6 @@ public class Keyboard : PointerUI
     {
         currentText += key.GetText();
         AppendToDisplayText(key.GetText());
-        /**string debug = "addToText (key): " + "(" + key.GetKeyType() + ") ";
-        if (key.GetKeyType().Equals(Key.KeyType.normal))
-        {
-            debug += key.GetText();
-        }
-        print(debug);*/
     }
 
     private void AppendToDisplayText(string addon)
