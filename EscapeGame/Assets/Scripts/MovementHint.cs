@@ -4,9 +4,14 @@ public class MovementHint : Hint
 {
 
     public Vector3 speed;
-    private Vector3 ADJUSTED_SPEED;
+
     public float duration;
+    public AudioSource sound;
+
+    private Vector3 ADJUSTED_SPEED;
     private bool started = false;
+    private bool soundStopped = false;
+   
 
     private static float INTERVAL;
 
@@ -22,6 +27,10 @@ public class MovementHint : Hint
         {
             started = true;
             used = true;
+            if (sound != null)
+            {
+                sound.Play();
+            }
             return true;
         }
         return false;
@@ -30,10 +39,14 @@ public class MovementHint : Hint
 
     void FixedUpdate()
     {
-        if(started && duration > 0.0f)
+        if (started && duration > 0.0f)
         {
             transform.position += ADJUSTED_SPEED;
             duration -= INTERVAL;
+        } else if(!soundStopped && sound != null && started)
+        {
+            soundStopped = true;
+            sound.Pause();
         }
     }
 }

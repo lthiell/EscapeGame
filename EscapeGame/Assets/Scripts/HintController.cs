@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class HintController : MonoBehaviour
 {
-    public float interval = 30.0f;
+    public float interval;
+    public float firstInterval;
     public List<Hint> hint_list = new List<Hint>();
+
+    private bool firstHint = true;
     
-    // Start is called before the first frame update
     void Start()
     {
         StartTimer();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void GiveHint()
@@ -27,12 +23,13 @@ public class HintController : MonoBehaviour
             Hint hint = hint_list[0];
             success = hint.Give();
             hint_list.RemoveAt(0);
+            firstHint = false;
         } 
     }
 
     public void StartTimer()
     {
-        InvokeRepeating("GiveHint", interval, interval);
+            InvokeRepeating("GiveHint", firstHint ? firstInterval : interval, interval);
     }
 
     public void RestartTimer()

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class GenericHint : Hint
 {
-    private bool used = false;
     public UnityEvent action;
 
 
