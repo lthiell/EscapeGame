@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovementHint : Hint
 {
@@ -15,7 +13,7 @@ public class MovementHint : Hint
     private void Start()
     {
         INTERVAL = Time.fixedDeltaTime;
-        ADJUSTED_SPEED = new Vector3(speed.x * INTERVAL, speed.y * INTERVAL, speed.z * INTERVAL);
+        ADJUSTED_SPEED = speed * INTERVAL;
     }
 
     public override bool Give()
@@ -30,13 +28,10 @@ public class MovementHint : Hint
     }
 
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(started && duration > 0.0f)
         {
-            print(ADJUSTED_SPEED);
-            print(INTERVAL);
             transform.position += ADJUSTED_SPEED;
             duration -= INTERVAL;
         }

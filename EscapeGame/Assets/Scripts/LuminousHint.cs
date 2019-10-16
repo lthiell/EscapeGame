@@ -10,12 +10,19 @@ public class LuminousHint : Hint
 
     public override bool Give()
     {
+       return Give(false);
+    }
+
+    private bool Give(bool minimalHint)
+    {
         if (!used)
         {
-            hintLight.enabled = true;
-            roomLight.enabled = false;
-            sound.Play();
-            Invoke("EnableRoomLightAndPlayAudioSource", 10.0f);
+            if (!minimalHint) {
+                hintLight.enabled = true;
+                roomLight.enabled = false;
+                sound.Play();
+                Invoke("EnableRoomLightAndPlayAudioSource", 6.0f);
+            }
             used = true;
             return true;
         }
@@ -30,7 +37,7 @@ public class LuminousHint : Hint
 
     public override void Disable()
     {
-        Give();
+        Give(true);
         base.Disable();
     }
 }

@@ -21,7 +21,6 @@ public class HintController : MonoBehaviour
 
     private void GiveHint()
     {
-        print("Hallo Sparkle!");
         bool success = false;
         while (!success && hint_list.Count > 0)
         {
