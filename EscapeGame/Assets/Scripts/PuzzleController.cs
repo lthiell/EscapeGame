@@ -9,16 +9,17 @@ public class PuzzleController : PointerUI
     public UnityEvent onPuzzleSolved;
     public List<PuzzlePiece> pieces;
 
-    private AudioSource audioSource;
+    private BoxCollider boxCollider;
+
+  
 
     public void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     public void Check()
     {
-        DisableAudioSource();
         bool solved = true;
         foreach(PuzzlePiece p in pieces)
         {
@@ -29,15 +30,17 @@ public class PuzzleController : PointerUI
         }
         if(solved)
         {
+            DisableBoxCollider();
             onPuzzleSolved.Invoke();
         }
     }
 
-    private void DisableAudioSource()
+    private void DisableBoxCollider()
     {
-        if (audioSource)
+        if(boxCollider)
         {
-            audioSource.enabled = false;
+            boxCollider.enabled = false;
         }
     }
+
 }

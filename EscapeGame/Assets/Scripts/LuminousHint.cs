@@ -18,21 +18,20 @@ public class LuminousHint : Hint
         if (!used)
         {
             if (!minimalHint) {
-                hintLight.enabled = true;
                 roomLight.enabled = false;
                 sound.Play();
-                Invoke("EnableRoomLightAndPlayAudioSource", 6.0f);
+                Invoke("EnableRoomLight", 6.0f);
             }
+            hintLight.enabled = true;
             used = true;
             return true;
         }
         return false;
     }
 
-    private void EnableRoomLightAndPlayAudioSource()
+    private void EnableRoomLight()
     {
         roomLight.enabled = true;
-        sound.Play();
     }
 
     public override void Disable()

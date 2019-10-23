@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Hint: MonoBehaviour
 {
     protected bool used = false;
+
+    private HintController controller;
     public abstract bool Give();
 
     public virtual void Disable() {

@@ -7,6 +7,7 @@ public class LockedMovable : MagicMovable
     public bool locked;
     public GameObject key;
     public List<GameObject> container = new List<GameObject>();
+    public List<Hint> associatedHints = new List<Hint>();
 
     private AudioSource audioSource;
 
@@ -53,6 +54,10 @@ public class LockedMovable : MagicMovable
             foreach (GameObject go in container)
             {
                 objectHider.ShowGameObject(go);
+            }
+            foreach (Hint hint in associatedHints)
+            {
+                hint.Disable();
             }
         }
     }

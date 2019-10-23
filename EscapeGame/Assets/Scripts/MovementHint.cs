@@ -49,4 +49,10 @@ public class MovementHint : Hint
             sound.Pause();
         }
     }
+
+    public override void Disable()
+    {
+        base.Disable();
+        print("Ausgemacht!");
+    }
 }
