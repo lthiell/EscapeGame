@@ -9,15 +9,6 @@ public class PuzzleController : PointerUI
     public UnityEvent onPuzzleSolved;
     public List<PuzzlePiece> pieces;
 
-    private BoxCollider boxCollider;
-
-  
-
-    public void Start()
-    {
-        boxCollider = GetComponent<BoxCollider>();
-    }
-
     public void Check()
     {
         bool solved = true;
@@ -30,17 +21,7 @@ public class PuzzleController : PointerUI
         }
         if(solved)
         {
-            DisableBoxCollider();
             onPuzzleSolved.Invoke();
         }
     }
-
-    private void DisableBoxCollider()
-    {
-        if(boxCollider)
-        {
-            boxCollider.enabled = false;
-        }
-    }
-
 }

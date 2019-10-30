@@ -10,7 +10,9 @@ public class LuminousHint : Hint
 
     public override bool Give()
     {
-       return Give(false);
+        bool res = Give(false);
+        used = true;
+        return res;
     }
 
     private bool Give(bool minimalHint)
@@ -23,7 +25,6 @@ public class LuminousHint : Hint
                 Invoke("EnableRoomLight", 6.0f);
             }
             hintLight.enabled = true;
-            used = true;
             return true;
         }
         return false;

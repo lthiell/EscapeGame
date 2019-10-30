@@ -10,8 +10,11 @@ public abstract class Hint: MonoBehaviour
     public abstract bool Give();
 
     public virtual void Disable() {
-        used = true;
-        HintController hintController = GameObject.Find("GameLogic").GetComponent<HintController>();
-        hintController.RestartTimer();
+        if(!used)
+        {
+            used = true;
+            HintController hintController = GameObject.Find("GameLogic").GetComponent<HintController>();
+            hintController.RestartTimer();
+        }
     }
 }

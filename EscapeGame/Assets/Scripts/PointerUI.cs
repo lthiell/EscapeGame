@@ -7,7 +7,7 @@ public class PointerUI : MonoBehaviour
 
     public List<GameObject> pointerObjects;
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.CompareTag("Hand"))
             return;
@@ -17,7 +17,7 @@ public class PointerUI : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Hand"))
             return;

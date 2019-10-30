@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MathValidator : PointerUI
@@ -23,6 +24,7 @@ public class MathValidator : PointerUI
     public List<string> solutionsList;
     public List<Text> textsList;
 
+    public UnityEvent onAllCorrect;
 
 
     private Text currentText;
@@ -38,22 +40,40 @@ public class MathValidator : PointerUI
         {
             if (first)
             {
-                areaStatus.Add(t, Status.SELECTED);
+                SetSelected(t);
                 first = false;
-                currentText = t;
             }
             else
             {
-                areaStatus.Add(t, Status.NOT_SELECTED);
-                t.text = DEFAULT_TEXT;
+                SetNotSelected(t);
             }
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Hand"))
+            return;
+        /* Damit der Strahl für das Tablet noch nicht aktiviert wird, bevor der Spieler es gefunden hat, ist zuerst nur ein 
+         * sehr kleiner Collider aktiv, sobald dieser einmal getriggert wird, werden alle Collider aktiviert. */
+        BoxCollider[] boxColliders = GetComponents<BoxCollider>();
+        foreach(BoxCollider bc in boxColliders)
+        {
+            bc.enabled = true;
         }
     }
 
 
     protected virtual void AddToText(Key key)
     {
-        currentText.text = key.GetText();
+        int res = 0;
+        bool isInt = int.TryParse(currentText.text, out res);
+        if (isInt && res < 100) {
+            currentText.text += key.GetText();
+        } else
+        {
+            currentText.text = key.GetText();
+        }
     }
 
 
@@ -78,70 +98,82 @@ public class MathValidator : PointerUI
     private void CheckAllSolutions()
     {
         bool done = true;
+        Text nextText = null;
         foreach (Text text in areaStatus.Keys)
         {
-            done &= areaStatus[text].Equals(Status.CORRECT);
+            bool correct = areaStatus[text].Equals(Status.CORRECT);
+            done &= correct;
+            if (!nextText && !correct)
+            {
+                nextText = text;
+            }
         }
         if (done)
         {
             locked = true;
+            onAllCorrect.Invoke();
+        } else
+        {
+            SetSelected(nextText);
         }
+
     }
 
     private void Submit()
     {
-        // TODO
-        if(currentText.text.Equals(solutions[currentText]))
+        if(currentText && currentText.text.Equals(solutions[currentText]))
         {
-            SetCurrentStatus(Status.CORRECT);
+            SetCorrect(currentText);
             CheckAllSolutions();
         } else
         {
-            currentText.text = DEFAULT_TEXT;
+            SetSelected(currentText);
         }
     }
 
-
-    private void SetCurrentStatus(Status status)
+    private void SetSelected(Text inText)
     {
-        SetStatus(currentText, status);
-    }
-    private void SetStatus(Text inText, Status status)
-    {
-        areaStatus[inText] = status;
-        switch (status)
+        print("setSelected");
+        if (currentText)
         {
-            case Status.NOT_SELECTED:
-                currentText.text = DEFAULT_TEXT;
-                currentText.color = DEFAULT_COLOR;
-                break;
-            case Status.SELECTED:
-                currentText.text = "";
-                currentText.color = SELECTED_COLOR;
-                foreach (Text text in solutions.Keys)
-                {
-                    if (!areaStatus[text].Equals(Status.CORRECT))
-                    {
-                        SetStatus(text, Status.NOT_SELECTED);
-                    }
-                }
-                break;
-            case Status.CORRECT:
-                currentText.color = CORRECT_COLOR;
-                break;
+            SetNotSelected(currentText);
         }
+        currentText = inText;
+        areaStatus[currentText] = Status.SELECTED;
+        currentText.text = "";
+        currentText.color = SELECTED_COLOR;
     }
+
+    private void SetCorrect(Text inText)
+    {
+        print("setCorrect");
+        if (inText.Equals(currentText))
+        {
+            currentText = null;
+        }
+        areaStatus[inText] = Status.CORRECT;
+        inText.color = CORRECT_COLOR;
+    }
+
+    private void SetNotSelected(Text inText)
+    {
+        print("setNotSelected");
+        if (inText.Equals(currentText))
+        {
+            currentText = null;
+        }
+        areaStatus[inText] = Status.NOT_SELECTED;
+        inText.text = DEFAULT_TEXT;
+        inText.color = DEFAULT_COLOR;
+    }
+
 
     public void SetInput(Text text)
     {
-        if (!locked && textsList.Contains(text))
+        if (!locked && textsList.Contains(text) && !Status.CORRECT.Equals(areaStatus[text]))
         {
             Submit();
-            if (!Status.CORRECT.Equals(areaStatus[text]))
-            {
-                currentText = text;
-                SetCurrentStatus(Status.SELECTED);
-            }
+            SetSelected(text);
         }
     }
 }

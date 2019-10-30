@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.escapegame.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\EscapeGame\\Escape Game GIT\\EscapeGame\\EscapeGame\\actions.json",
+      "action_manifest_path": "D:\\Escapegame_git\\EscapeGame\\EscapeGame\\actions.json",
       "strings": {
         "en_us": {
           "name": "EscapeGame [Testing]"

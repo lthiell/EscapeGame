@@ -5,7 +5,6 @@ using Valve.VR;
 public class LibLogic : MonoBehaviour
 {
     public GameObject keyboard;
-    public GameObject keypad;
     public Material computerUnlockedMaterial;
     public Material computerWrongPasswordMaterial;
     public Material computerDefaultMaterial;
@@ -27,7 +26,7 @@ public class LibLogic : MonoBehaviour
 
     private bool computerLocked = true;
 
-    private List<GameObject> rayInputElements;
+    public List<GameObject> rayInputElements;
 
     private Haptics haptics;
 
@@ -35,7 +34,6 @@ public class LibLogic : MonoBehaviour
     {
         gameObject.AddComponent(typeof(LevelLoader));
         levelLoader = GetComponent<LevelLoader>();
-        rayInputElements = new List<GameObject>(new GameObject[] { keyboard, keypad });
         haptics = GetComponent<Haptics>();
         haptics.SetInputSource(leftHandRay ? SteamVR_Input_Sources.LeftHand : SteamVR_Input_Sources.RightHand);
     }
