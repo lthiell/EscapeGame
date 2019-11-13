@@ -5,11 +5,13 @@ using UnityEngine.EventSystems;
 
 public class Pointer : MonoBehaviour
 {
-
+    // maximale Entfernung, für die der Raycast durchgeführt wird
     public float m_DefaultLength = 5.0f;
+    // Kugel, die am Ende der Linie gerendert wird
     public GameObject m_Dot;
     public VRInputModule m_InputModule;
 
+    // Rendert die Linie
     private LineRenderer m_LineRenderer = null;
 
     private void Awake()
@@ -24,27 +26,27 @@ public class Pointer : MonoBehaviour
 
     private void UpdateLine()
     {
-        //  Use default or distance
+        // Entfernung oder maximale Länge
         PointerEventData data = m_InputModule.GetData();
         float targetLength = data.pointerCurrentRaycast.distance == 0 
             ? m_DefaultLength 
             : data.pointerCurrentRaycast.distance;
 
-        // Raycast
+        // Raycasting
         RaycastHit hit = CreateRaycast(targetLength);
 
-        // Default
+        // Endposition des Strahls auf maximale Länge setzen
         Vector3 endPosition = transform.position + (transform.forward * targetLength);
 
-        // Or based on hit
+        // Wenn ein Collider getroffen wurde, Endposition des Strahls auf diesen Punkt setzen
         if(hit.collider != null)
         {
             endPosition = hit.point;
         }
 
-        // Set position of the dot
+        // Kugel an die Endposition platzieren
         m_Dot.transform.position = endPosition;
-        // Set linerenderer
+        // Linie rendern
         m_LineRenderer.SetPosition(0, transform.position);
         m_LineRenderer.SetPosition(1, endPosition);
     }

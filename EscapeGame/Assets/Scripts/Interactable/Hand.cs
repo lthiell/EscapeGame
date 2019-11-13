@@ -24,15 +24,12 @@ public class Hand : MonoBehaviour
         m_Joint = GetComponent<FixedJoint>();
     }
 
-
-    // Update is called once per frame
     private void Update()
     {
         if (m_GrabAction.GetStateDown(m_Pose.inputSource))
         {
             Pickup();
-        }
-        if (m_GrabAction.GetStateUp(m_Pose.inputSource))
+        } else if (m_GrabAction.GetStateUp(m_Pose.inputSource))
         {
             Drop();
         }

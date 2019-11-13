@@ -62,7 +62,6 @@ public class MathValidator : PointerUI
         }
     }
 
-
     protected virtual void AddToText(Key key)
     {
         int res = 0;
@@ -74,8 +73,6 @@ public class MathValidator : PointerUI
             currentText.text = key.GetText();
         }
     }
-
-
 
     public void HandleKeyPress(Key key)
     {
@@ -132,7 +129,6 @@ public class MathValidator : PointerUI
 
     private void SetSelected(Text inText)
     {
-        print("setSelected");
         if (currentText)
         {
             SetNotSelected(currentText);
@@ -145,7 +141,6 @@ public class MathValidator : PointerUI
 
     private void SetCorrect(Text inText)
     {
-        print("setCorrect");
         if (inText.Equals(currentText))
         {
             currentText = null;
@@ -156,7 +151,6 @@ public class MathValidator : PointerUI
 
     private void SetNotSelected(Text inText)
     {
-        print("setNotSelected");
         if (inText.Equals(currentText))
         {
             currentText = null;
@@ -173,6 +167,20 @@ public class MathValidator : PointerUI
         {
             Submit();
             SetSelected(text);
+        }
+    }
+
+    /* Da es ggf. mehrere Trigger-Collider gibt, müssen alle beim vollständigen Lösen deaktiviert werden. */
+    public void RemoveAllTriggers()
+    {
+        BoxCollider[] boxColliders = GetComponents<BoxCollider>();
+        foreach (BoxCollider bc in boxColliders)
+        {
+            if(bc.isTrigger)
+            {
+                bc.enabled = false;
+            }
+
         }
     }
 }

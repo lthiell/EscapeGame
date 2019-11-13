@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using Valve.VR;
+﻿using UnityEngine.UI;
 
 public class Keyboard : PointerUI
 {
